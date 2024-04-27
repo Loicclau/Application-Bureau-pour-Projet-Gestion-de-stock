@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <link href="output.css" rel="stylesheet" />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+  </head>
+  <body>
+    <main class="w-full h-screen flex justify-center items-center flex-col">
+      <div
+        class="w-4/5 max-w-4xl bg-zinc-100 rounded-xl shadow-lg p-8 border border-zinc-400"
+      >
+        <div class="flex items-center">
+          <div class="mr-4">
+            <!-- class="w-24 h-24 rounded-full" -->
+            <img
+              src="..\.\img\Image_Iris_systeme.png"
+              alt="Logo Iris systeme"
+              class="w-auto h-auto max-w-full max-h-full"
+            />
+          </div>
+          <div class="">
+            <h1 class="block text-gray-800 text-2xl font-bold mb-2">
+              Bienvenue ! Saisis les informations pour ajouter un produit dans
+              la base de données du stock, et générer ton QR Code.
+            </h1>
+          </div>
+        </div>
+
+        <br />
+
+        <form>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="username"
+            >
+              Nom du produit
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Nom"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="username"
+            >
+              Référence du produit
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Référence"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="quantiteProduit"
+            >
+              Quantité de produit
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="quantiteProduit"
+              type="number"
+              placeholder="Combien de fois ajouter ce produit ?"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="numberQR"
+            >
+              Quantité de QR Code a générer
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="numberQR"
+              type="number"
+              placeholder="Combien de QR Code veux tu ?"
+            />
+          </div>
+
+          <div class="mb-6">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="text"
+            >
+              Informations complémentaires
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="text"
+              type="text"
+              placeholder="Exemple : Prise pour chantier à venir, Position dans le stock"
+            />
+          </div>
+          <div class="flex items-center justify-between">
+            <a href="Confirmation_ajout.html" class="block w-max mx-auto">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ring-2"
+                type="button"
+              >
+                Click pour ajouter au stock !
+              </button>
+            </a>
+            <a
+              class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              href="index.html"
+            >
+              Retournez au menu ?
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
