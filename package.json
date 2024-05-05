@@ -24,6 +24,8 @@
     "tailwindcss": "^3.4.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "child_process": "^1.0.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "python-shell": "^5.0.0"
   }
 }

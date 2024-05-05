@@ -6,3 +6,13 @@ contextBridge.exposeInMainWorld("versions", {
   electron: () => process.versions.electron,
   // nous pouvons aussi exposer des variables en plus des fonctions
 });
+
+contextBridge.exposeInMainWorld("electronAPI", {
+  test: (nameProduitInput, ReferenceInput, QRCodeInput) =>
+    ipcRenderer.invoke(
+      "dialog:test",
+      nameProduitInput,
+      ReferenceInput,
+      QRCodeInput
+    ),
+});
