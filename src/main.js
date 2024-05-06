@@ -9,7 +9,7 @@ const createWindow = () => {
     fullscreen: true,
     maximized: false,
     center: true,
-    frame: false,
+    frame: false, //enleve la barre par defaut
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
       nodeIntegration: true,
@@ -21,11 +21,14 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
+  ipcMain.handle("dialog:quitApp", () => {
+    app.quit(); // Quitter l'application
+    console.log("Application Fermee");
+  });
+
   ipcMain.handle(
     "dialog:test",
     (event, nameProduitInput, ReferenceInput, QRCodeInput) => {
-      console.log("Username:", nameProduitInput);
-
       // Chemin vers le fichier Python à exécuter
       const cheminFichierPython = "src/Envoie_donnée_QRCode.py";
 
@@ -43,14 +46,7 @@ app.whenReady().then(() => {
           console.log(`Sortie de l'exécution du script Python : ${stdout}`);
         }
       );
-
-      return " Traitement effectué avec succès ! " /*ton username est " +
-        nameProduitInput +
-        " la ref : " +
-        ReferenceInput +
-        " Avec " +
-        QRCodeInput +
-        " QR CODE a generée"*/;
+      return " Traitement effectué avec succès ! ";
     }
   );
 
