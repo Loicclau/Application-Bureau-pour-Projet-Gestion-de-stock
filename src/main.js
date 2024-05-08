@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron/main");
 const path = require("node:path");
 const { exec } = require("child_process");
 let win;
+const mysql = require("mysql");
 
 const createWindow = () => {
   win = new BrowserWindow({
@@ -28,14 +29,21 @@ app.whenReady().then(() => {
 
   ipcMain.handle(
     "dialog:test",
-    (event, nameProduitInput, ReferenceInput, QRCodeInput) => {
+    (
+      event,
+      nameProduitInput,
+      ReferenceInput,
+      QRCodeInput,
+      quantiteInput,
+      Info_en_plus
+    ) => {
       // Chemin vers le fichier Python à exécuter
       const cheminFichierPython = "src/Envoie_donnée_QRCode.py";
 
       // Exécution du fichier Python avec les données en tant qu'arguments de ligne de commande
       // avec module child_process pour installer : npm install child_process
       exec(
-        `py ${cheminFichierPython} ${nameProduitInput} ${ReferenceInput} ${QRCodeInput}`, //ou python
+        `python ${cheminFichierPython} ${nameProduitInput} ${ReferenceInput} ${QRCodeInput}`, //ou python sur raspberry
         (erreur, stdout, stderr) => {
           if (erreur) {
             console.error(
@@ -43,9 +51,60 @@ app.whenReady().then(() => {
             );
             return;
           }
-          console.log(`Sortie de l'exécution du script Python : ${stdout}`);
+          console.log(`Python fini sans erreur`);
         }
       );
+      // Create the connection to database
+      const connection = mysql.createConnection({
+        host: "localhost", //ip raspberry pi
+        user: "admin",
+        password: "adminadmin",
+        database: "StockIris",
+      });
+
+      connection.connect((err) => {
+        if (err) {
+          console.log("Erreur de connexion");
+          return;
+        }
+        console.log("Connectee a la base MariaDB !");
+      });
+
+      // Executer la requete SELECT
+      connection.query(
+        "INSERT INTO Produit (nomProduit, referenceProduit, quantiteStock, infoSup) VALUES ('" +
+          nameProduitInput +
+          "', '" +
+          ReferenceInput +
+          "', '" +
+          quantiteInput +
+          "', '" +
+          Info_en_plus +
+          "')",
+        (err) => {
+          if (err) {
+            console.error(
+              "Erreur lors de lexecution de la requete : " + err.stack
+            );
+            return;
+          }
+          console.log("Ligne insérée avec succès!");
+        }
+      );
+
+      // Executer la requete SELECT
+      connection.query("SELECT * FROM Produit", (err, rows) => {
+        if (err) {
+          console.error(
+            "Erreur lors de lexecution de la requ�te : " + err.stack
+          );
+          return;
+        }
+        console.log("R�sultat de la requ�te :");
+        console.log(rows);
+      });
+
+      connection.end();
       return " Traitement effectué avec succès ! ";
     }
   );

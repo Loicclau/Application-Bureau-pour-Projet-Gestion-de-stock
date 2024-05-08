@@ -8,12 +8,20 @@ contextBridge.exposeInMainWorld("versions", {
 });
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  test: (nameProduitInput, ReferenceInput, QRCodeInput) =>
+  test: (
+    nameProduitInput,
+    ReferenceInput,
+    QRCodeInput,
+    quantiteInput,
+    Info_en_plus
+  ) =>
     ipcRenderer.invoke(
       "dialog:test",
       nameProduitInput,
       ReferenceInput,
-      QRCodeInput
+      QRCodeInput,
+      quantiteInput,
+      Info_en_plus
     ),
 
   quitApp: () => ipcRenderer.invoke("dialog:quitApp"),

@@ -46,7 +46,9 @@ btn.addEventListener("click", async (event) => {
     const response = await window.electronAPI.test(
       nameProduitInput,
       ReferenceInput,
-      QRCodeInput
+      QRCodeInput,
+      quantiteInput,
+      Info_en_plus
     );
     //event.preventDefault();
     //document.getElementById("stockForm").reset();

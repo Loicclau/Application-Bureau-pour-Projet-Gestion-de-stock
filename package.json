@@ -26,6 +26,8 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "electron-squirrel-startup": "^1.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.7",
     "python-shell": "^5.0.0"
   }
 }
