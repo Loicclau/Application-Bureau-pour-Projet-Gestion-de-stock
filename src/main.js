@@ -70,7 +70,7 @@ app.whenReady().then(() => {
         console.log("Connectee a la base MariaDB !");
       });
 
-      // Executer la requete SELECT
+      // Executer la requete INSERT INTO
       connection.query(
         "INSERT INTO Produit (nomProduit, referenceProduit, quantiteStock, infoSup) VALUES ('" +
           nameProduitInput +
@@ -92,17 +92,21 @@ app.whenReady().then(() => {
         }
       );
 
-      // Executer la requete SELECT
-      connection.query("SELECT * FROM Produit", (err, rows) => {
-        if (err) {
-          console.error(
-            "Erreur lors de lexecution de la requ�te : " + err.stack
-          );
-          return;
+      // Executer la requete SELECT pour avoir le dernier produit rentree
+      // Récupérer une seule ligne, la première qui est la dernière si triée par ordre décroissant
+      connection.query(
+        "SELECT * FROM Produit ORDER BY idProduit DESC LIMIT 1",
+        (err, rows) => {
+          if (err) {
+            console.error(
+              "Erreur lors de lexecution de la requ�te : " + err.stack
+            );
+            return;
+          }
+          console.log("Dernier produit inséré : ");
+          console.log(rows);
         }
-        console.log("R�sultat de la requ�te :");
-        console.log(rows);
-      });
+      );
 
       connection.end();
       return " Traitement effectué avec succès ! ";
