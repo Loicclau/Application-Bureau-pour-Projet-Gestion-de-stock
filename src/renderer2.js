@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
   // Supprimer automatiquement le message après 3 secondes
   setTimeout(() => {
     messageElement.innerText = "";
-  }, 3000); // 3 secondes
+  }, 8000); // 8 secondes
   storeMessage("");
 });
 
@@ -60,5 +60,6 @@ btn.addEventListener("click", async (event) => {
     messageElement.innerText = " Remplis tous les champs ! ";
     messageElement.classList.remove("bg-green-300", "text-green-700");
     messageElement.classList.add("bg-red-300", "text-red-700");
+    const envoieErreur = await window.electronAPI.VoixErreur();
   }
 });

@@ -25,4 +25,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ),
 
   quitApp: () => ipcRenderer.invoke("dialog:quitApp"),
+
+  VoixErreur: () => ipcRenderer.invoke("dialog:VoixErreur"),
 });

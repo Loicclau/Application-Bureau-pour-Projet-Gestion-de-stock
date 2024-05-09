@@ -27,6 +27,15 @@ app.whenReady().then(() => {
     console.log("Application Fermee");
   });
 
+  ipcMain.handle("dialog:VoixErreur", () => {
+    // Chemin vers le fichier Python à exécuter
+    const cheminFichierPython2 = "src/VoixErreur.py";
+    exec(
+      `python ${cheminFichierPython2}`, //ou python sur raspberry
+      (erreur, stdout, stderr) => {}
+    );
+  });
+
   ipcMain.handle(
     "dialog:test",
     (
@@ -44,7 +53,7 @@ app.whenReady().then(() => {
       // avec module child_process pour installer : npm install child_process
       exec(
         `python ${cheminFichierPython} ${nameProduitInput} ${ReferenceInput} ${QRCodeInput}`, //ou python sur raspberry
-        (erreur, stdout, stderr) => {
+        (erreur) => {
           if (erreur) {
             console.error(
               `Erreur lors de l'exécution du script Python : ${erreur}`
@@ -99,7 +108,7 @@ app.whenReady().then(() => {
         (err, rows) => {
           if (err) {
             console.error(
-              "Erreur lors de lexecution de la requ�te : " + err.stack
+              "Erreur lors de lexecution de la requete : " + err.stack
             );
             return;
           }
@@ -109,7 +118,9 @@ app.whenReady().then(() => {
       );
 
       connection.end();
-      return " Traitement effectué avec succès ! ";
+      return (
+        " Votre produit :  " + nameProduitInput + " a été ajouter au stock ! "
+      );
     }
   );
 

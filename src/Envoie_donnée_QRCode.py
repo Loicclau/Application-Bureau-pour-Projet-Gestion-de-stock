@@ -1,7 +1,6 @@
 import serial
 import time
 import sys
-
 from nava import play, stop
 
 productName = sys.argv[1]
@@ -18,6 +17,9 @@ time.sleep(3)  # Attendez que la connexion soit établie
 serial_port.write(str(quantiteQR).encode())  # Envoyer la quantité d'itérations
 serial_port.write(data.encode())  # Envoyer les autres données
 
-sound_id = play("src/Validation.wav", async_mode=True)
-time.sleep(4)
+sound_id = play("Voix/Validation.wav", async_mode=True)
+time.sleep(1)
 stop(sound_id)
+sound_id2 = play("Voix/Voix_BaseAJour.wav", async_mode=True)
+time.sleep(3)
+stop(sound_id2)

@@ -7,9 +7,10 @@
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "build": "electron-packager . StockIrisApp --platform=win32 --arch=x64 --icon=img/Image_Iris_systeme.ico"
   },
-  "author": "loic",
+  "author": "IrisSysteme",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -21,6 +22,7 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "electron": "^30.0.1",
+    "electron-packager": "^17.1.2",
     "tailwindcss": "^3.4.3"
   },
   "dependencies": {
