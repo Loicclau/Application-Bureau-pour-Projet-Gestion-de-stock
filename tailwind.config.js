@@ -5,7 +5,7 @@ module.exports = {
     "./src/index.html",
     "./src/ajouter.html",
     "./src/sortir.html",
-    "./src/Confirmation_ajout.html",
+    "./src/Afficher.html",
   ],
   theme: {
     extend: {},
